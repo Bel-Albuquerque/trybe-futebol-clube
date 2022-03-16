@@ -1,6 +1,6 @@
 FROM node:16-alpine
-WORKDIR /backend
-COPY package.json .
+WORKDIR /
+COPY package*.json ./
 RUN npm install
 COPY . .
 EXPOSE 3001
