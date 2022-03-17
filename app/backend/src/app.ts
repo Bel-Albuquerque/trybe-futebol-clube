@@ -1,11 +1,11 @@
-import * as express from 'express';
+import express from 'express';
 
 class App {
   public app: express.Express;
   // ...
 
   constructor() {
-    // ...
+    this.app = express();
     this.config();
     // ...
   }
@@ -24,7 +24,8 @@ class App {
 
   // ...
   public start(PORT: string | number):void {
-    // ...
+    this.app.listen(PORT, () => console.log(`ouvindo na porta ${PORT}`));
+    this.app.use(express.json());
   }
 }
 
