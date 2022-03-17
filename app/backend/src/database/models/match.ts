@@ -1,38 +1,35 @@
-'use strict';
-
 import { Model } from 'sequelize';
+import { DataTypes } from 'sequelize/types';
 import db from '.';
-import { DataTypeBoolean } from "sequelize";
-import { DataTypes } from "sequelize/types";
-import club from './club';
+import Clubs from './club';
 
+export default class Match extends Model {
+  public id: number;
 
-export default class match extends Model {
-    public id: { type: DataTypes.IntegerDataType, primaryKey: true, autoIncrement: true },
-    public home_team:{ type: DataTypes.NumberDataType, allowNull: false },
-    public home_team_goals:{ type: DataTypes.NumberDataType, allowNull: false },
-    public away_team:{ type: DataTypes.NumberDataType, allowNull: false },
-    public away_team_goals:{ type: DataTypes.NumberDataType, allowNull: false },
-    public in_progress: { type: DataTypeBoolean, allowNull: false }
+  public home_team: number;
 
-    static associate(models) {
-    match.belongsTo(club, { foreignKey: 'home_team', as: 'id' });
-    match.belongsTo(club, { foreignKey: 'away_team', as: 'id' });
-      
-    }
-  };
+  public home_team_goals: number;
 
-  match.init({
-    id: DataTypes.NUMBER,
-    home_team: DataTypes.NUMBER,
-    home_team_goals: DataTypes.NUMBER,
-    away_team: DataTypes.NUMBER,
-    away_team_goals: DataTypes.NUMBER,
-    in_progress: DataTypes.BOOLEAN
-  }, {
-    underscored: true,
-    sequelize: db,
-    timestamps: false,
-    modelName: 'match',
-  });
-  
+  public away_team: number;
+
+  public away_team_goals: number;
+
+  public in_progress: number;
+}
+
+Match.init({
+  id: { type: DataTypes.INTEGER, primaryKey: true, autoIncrement: true },
+  home_team: { type: DataTypes.INTEGER, allowNull: false },
+  home_team_goals: { type: DataTypes.INTEGER, allowNull: false },
+  away_team: { type: DataTypes.INTEGER, allowNull: false },
+  away_team_goals: { type: DataTypes.INTEGER, allowNull: false },
+  in_progress: { type: DataTypes.BOOLEAN, allowNull: false },
+}, {
+  underscored: true,
+  sequelize: db,
+  timestamps: false,
+  modelName: 'match',
+});
+
+Match.belongsTo(Clubs, { foreignKey: 'home_team', as: 'id' });
+Match.belongsTo(Clubs, { foreignKey: 'away_team', as: 'id' });
