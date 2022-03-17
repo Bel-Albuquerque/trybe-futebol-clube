@@ -1,17 +1,26 @@
 import { DataTypes, Model } from 'sequelize';
 import db from '.';
 
-export default class club extends Model {
-  public id: { type: DataTypes.IntegerDataType, primaryKey: true, autoIncrement: true },
-  public club_name: DataTypes.StringDataType
+export default class Clubs extends Model {
+  public id: number;
 
-};
-club.init({
-  id: DataTypes.NUMBER,
-  club_name: DataTypes.STRING,
+  public club_name: string;
+}
+
+Clubs.init({
+  id: {
+    type: DataTypes.INTEGER.UNSIGNED,
+    primaryKey: true,
+    autoIncrement: true,
+    allowNull: false,
+  },
+  club_name: {
+    type: DataTypes.STRING,
+    allowNull: false,
+  },
 }, {
   underscored: true,
   sequelize: db,
-  modelName: 'club',
+  modelName: 'clubs',
   timestamps: false,
 });
