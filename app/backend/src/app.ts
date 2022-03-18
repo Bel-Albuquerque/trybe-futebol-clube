@@ -1,4 +1,5 @@
 import express from 'express';
+import router from './router';
 
 class App {
   public app: express.Express;
@@ -19,6 +20,7 @@ class App {
     };
 
     this.app.use(accessControl);
+    this.app.use('/', router);
     // ...
   }
 
