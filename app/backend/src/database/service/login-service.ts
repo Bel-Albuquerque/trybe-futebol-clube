@@ -9,6 +9,8 @@ export const postLoginService = async (email: string, password: string) => {
   }
   if (!compareSync(password, user?.password)) return false;
   const { id, username, role } = user;
+  console.log(id, username, role);
+
   const token = generateToken({ id, username, role });
   return token;
 };

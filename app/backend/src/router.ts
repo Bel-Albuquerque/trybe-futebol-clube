@@ -8,4 +8,7 @@ router
   .route('/login')
   .post(postLoginValidation, postLoginController);
 
+// router
+// .route('/login/validate')
+
 export default router;
