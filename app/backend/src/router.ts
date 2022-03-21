@@ -1,10 +1,11 @@
 import express from 'express';
-import { postLogin } from './database/controller/login';
+import { postLoginController } from './database/controller/login-controller';
+import { postLoginValidation } from './database/middlewares/login-validations';
 
 const router = express.Router();
 
 router
   .route('/login')
-  .post(postLogin);
+  .post(postLoginValidation, postLoginController);
 
 export default router;
