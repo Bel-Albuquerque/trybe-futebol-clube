@@ -1,2 +1,4 @@
 joi
 nodemon
+bcryptjs
+@types/bcryptjs
