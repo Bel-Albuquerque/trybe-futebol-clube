@@ -7,15 +7,16 @@ export const postLoginController = async (req: Request, res: Response) => {
   const { email, password } = req.body;
   console.log(req.body);
 
-  const token = await postLoginService(email, password);
+  const userLoged = await postLoginService(email, password);
 
-  if (token) return res.status(200).json(token);
+  if (userLoged) return res.status(200).json(userLoged);
 
-  return res.status(400).json(emailOrPasswodInvalid);
+  return res.status(401).json(emailOrPasswodInvalid);
 };
 
 export const getValidateLogin = async (req: Request, res: Response) => {
   const { authorization } = req.params;
   const userData = await decoder(authorization);
   if (userData) return res.status(200).json(userData.role);
+  return res.status(333).json({ message: 'deu ruim' });
 };

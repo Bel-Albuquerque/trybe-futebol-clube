@@ -10,7 +10,7 @@ const userSchema = Joi.object({
 export const postLoginValidation = (req: Request, res: Response, next: NextFunction) => {
   const { error } = userSchema.validate(req.body);
   if (error) {
-    return res.status(400).json(joiMessageErro(error));
+    return res.status(401).json(joiMessageErro(error));
   }
   next();
 };

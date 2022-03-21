@@ -11,7 +11,7 @@ export const postLoginService = async (email: string, password: string) => {
   const { id, username, role } = user;
 
   const token = generateToken({ id, username, role });
-  return token;
+  return { user: { id, username, role, email }, token };
 };
 
 export const xablau = 'xablau';
