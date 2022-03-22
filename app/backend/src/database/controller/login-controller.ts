@@ -15,8 +15,10 @@ export const postLoginController = async (req: Request, res: Response) => {
 };
 
 export const getValidateLogin = async (req: Request, res: Response) => {
-  const { authorization } = req.params;
-  const userData = await decoder(authorization);
-  if (userData) return res.status(200).json(userData.role);
-  return res.status(333).json({ message: 'deu ruim' });
+  const { authorization } = req.headers;
+  if (authorization) {
+    const userData = await decoder(authorization);
+    if (userData) return res.status(200).json(userData.role);
+  }
+  return res.status(401).end();
 };
