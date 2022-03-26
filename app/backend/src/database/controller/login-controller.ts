@@ -5,7 +5,6 @@ import { postLoginService } from '../service/login-service';
 
 export const postLoginController = async (req: Request, res: Response) => {
   const { email, password } = req.body;
-  console.log(req.body);
 
   const userLoged = await postLoginService(email, password);
 
