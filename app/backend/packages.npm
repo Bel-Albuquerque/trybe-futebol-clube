@@ -2,3 +2,4 @@ joi
 nodemon
 bcryptjs
 @types/bcryptjs
+@types/chai-http
