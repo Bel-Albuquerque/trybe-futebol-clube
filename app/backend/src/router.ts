@@ -9,7 +9,7 @@ import {
   getAllMatchsController,
   addMatchController,
   editMatchController,
-  editMatchGoals,
+  editMatchGoalsController,
 } from './database/controller/matchs-controller';
 import { tokenValidation } from './database/middlewares/tokenValidation';
 import { postMatchValidation } from './database/middlewares/matchs-validations';
@@ -38,7 +38,7 @@ router
 
 router
   .route('/matchs/:id')
-  .patch(editMatchGoals);
+  .patch(editMatchGoalsController);
 
 router
   .route('/matchs')

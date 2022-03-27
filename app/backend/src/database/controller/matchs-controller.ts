@@ -41,7 +41,7 @@ export const editMatchController = async (req: Request, res: Response) => {
   return res.status(200).json(editMatch);
 };
 
-export const editMatchGoals = async (req: Request, res: Response) => {
+export const editMatchGoalsController = async (req: Request, res: Response) => {
   const { id } = req.params;
   const { homeTeamGoals, awayTeamGoals } = req.body;
   const editMatch = await editMatchGoalsService(Number(id), homeTeamGoals, awayTeamGoals);
