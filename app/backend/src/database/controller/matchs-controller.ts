@@ -1,9 +1,11 @@
 import { Request, Response } from 'express';
+import { teamNotFound } from '../erros.ts/erroMessages';
 import {
   getAllMatchsService,
   getTrueOrFalseMatchsService,
   addMatchService,
   editMatchService,
+  checkClubsIds,
 } from '../service/matchs-service';
 
 export const getAllMatchsController = async (req: Request, res: Response) => {
@@ -20,8 +22,14 @@ export const getAllMatchsController = async (req: Request, res: Response) => {
 };
 
 export const addMatchController = async (req: Request, res: Response) => {
+  const { homeTeam, awayTeam } = req.body;
+
+  const validClubs = await checkClubsIds(Number(homeTeam), Number(awayTeam));
+  if (!validClubs) return res.status(401).json(teamNotFound);
+
   const newMatch = await addMatchService(req.body);
   if (!newMatch) return res.status(401).end();
+
   return res.status(201).json(newMatch);
 };
 
