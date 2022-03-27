@@ -4,7 +4,7 @@ import chaiHttp = require('chai-http');
 import { app } from '../app';
 import { Response } from 'superagent';
 import Matchs from '../database/models/match'
-import { allMatchs } from './mocks/matchsMock';
+import { allMatchs, inProgressTrueMatchs, inProgressFalseMatchs } from './mocks/matchsMock';
 chai.use(chaiHttp);
 
 const { expect } = chai;
@@ -15,8 +15,6 @@ let chaiRequestLib = chaiLib.default.request;
 
 describe('Rota /matchs', () => {
   let allMatchsResponse: Response;
-  let matchsInProgressResponse: Response;
-  let matchsNotInProgressResponse: Response
   
   before(async () => {
     sinon
@@ -24,10 +22,6 @@ describe('Rota /matchs', () => {
       .resolves(allMatchs as any);
     allMatchsResponse = await chaiRequestLib(app)
       .get('/matchs');
-    matchsInProgressResponse = await chaiRequestLib(app)
-      .get('/matchs?inProgress=true');
-    matchsNotInProgressResponse = await chaiRequestLib(app)
-      .get('/matchs?inProgress=false');
   });
 
   after(() => {
@@ -41,18 +35,24 @@ describe('Rota /matchs', () => {
     expect(allMatchsResponse).to.have.status(200);
     expect(body.length).to.be.equal(4);
   });
+});
 
-  it('Testa que ao escolher a opção de partidas em andamento será filtrado todas as partidas em andamento', () => {
-    const { body } = matchsInProgressResponse;
-
-    expect(matchsInProgressResponse).to.be.an('object');
-    expect(matchsInProgressResponse).to.have.status(200);
-    expect(body.length).to.be.equal(2);
-    expect(body[0].id).to.be.equal(1);
-    expect(body[1].id).to.be.equal(2);
+describe('Rota /matchs?inProgress=true', () => {
+  let matchsInProgressResponse: Response;
+  
+  before(async () => {
+    sinon
+      .stub(Matchs, 'findAll')
+      .resolves(inProgressTrueMatchs as any);
+    matchsInProgressResponse = await chaiRequestLib(app)
+      .get('/matchs?inProgress=true');
   });
 
-  it('Testa que ao escolher a opção de partidas finalizadas será filtrado todas as partidas finalizadas', () => {
+  after(() => {
+    (Matchs.findAll as sinon.SinonStub).restore();
+  })
+
+  it('Testa que ao escolher a opção de partidas em andamento será filtrado todas as partidas em andamento', () => {
     const { body } = matchsInProgressResponse;
 
     expect(matchsInProgressResponse).to.be.an('object');
@@ -62,3 +62,30 @@ describe('Rota /matchs', () => {
     expect(body[1].id).to.be.equal(42);
   });
 });
+
+describe('Rota /matchs?inProgress=true', () => {
+  let matchsNotInProgressResponse: Response
+  
+  before(async () => {
+    sinon
+      .stub(Matchs, 'findAll')
+      .resolves(inProgressFalseMatchs as any);
+    matchsNotInProgressResponse = await chaiRequestLib(app)
+      .get('/matchs?inProgress=false');
+  });
+
+  after(() => {
+    (Matchs.findAll as sinon.SinonStub).restore();
+  })
+  
+  it('Testa que ao escolher a opção de partidas finalizadas será filtrado todas as partidas finalizadas', () => {
+    const { body } = matchsNotInProgressResponse;
+
+    expect(matchsNotInProgressResponse).to.be.an('object');
+    expect(matchsNotInProgressResponse).to.have.status(200);
+    expect(body.length).to.be.equal(2);
+    expect(body[0].id).to.be.equal(1);
+    expect(body[1].id).to.be.equal(2);
+  });
+});
+
