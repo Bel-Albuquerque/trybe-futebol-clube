@@ -27,7 +27,7 @@ export const addMatchController = async (req: Request, res: Response) => {
 
 export const editMatchController = async (req: Request, res: Response) => {
   const { id } = req.params;
-  const newMatch = await editMatchService(id);
+  const newMatch = await editMatchService(Number(id));
   if (!newMatch) return res.status(401).end();
-  return res.status(201).json(newMatch);
+  return res.status(200).json(newMatch);
 };
