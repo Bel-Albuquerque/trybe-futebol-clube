@@ -51,11 +51,8 @@ describe('Rota /login', () => {
       .post('/login')
       .send(invalidPassword);
     validateHeades = await chaiRequestLib(app)
-      .get('/login/validate', {
-        headers: {
-          authorization: userResponse.token
-        }
-      });
+      .get('/login/validate')
+      .set({ Authorization: userResponse.token });
 
   });
 
@@ -109,16 +106,12 @@ describe('Rota /login', () => {
     expect(message).to.be.equal(ivalidFildMessage);
   });
 
-  // it('Testa se é possivel validar o tipo de usuário passando o token no header da requisição ', () => {
-  //   const { status } = validateHeades;
-
-  //   expect(validateHeades).to.be.an('object');
-  //   expect(validateHeades).to.have.status(200);
-  //   // expect(data).to.be.equal(userResponse.user.role);
-  // });
+  it.only('Testa se é possivel validar o tipo de usuário passando o token no header da requisição ', () => {
+    const { body } = validateHeades;
+    console.log(body);
+    
+    expect(validateHeades).to.be.an('object');
+    expect(validateHeades).to.have.status(200);
+    expect(validateHeades.body).to.be.equal(userResponse.user.role);
+  });
 });
-
-// expect(result).toHaveProperty("status");
-// expect(result).toHaveProperty("data");
-// expect(result.status).toBe(200);
-// expect(result.data).toBe("admin");
