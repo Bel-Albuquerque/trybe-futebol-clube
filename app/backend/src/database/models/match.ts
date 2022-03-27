@@ -1,5 +1,4 @@
-import { Model } from 'sequelize';
-import { DataTypes } from 'sequelize/types';
+import { DataTypes, Model } from 'sequelize';
 import db from '.';
 import Clubs from './club';
 
@@ -29,7 +28,8 @@ Match.init({
   sequelize: db,
   timestamps: false,
   modelName: 'match',
+  tableName: 'matchs',
 });
 
-Match.belongsTo(Clubs, { foreignKey: 'homeTeam', as: 'homeClub' });
-Match.belongsTo(Clubs, { foreignKey: 'awayTeam', as: 'awayClub' });
+Match.belongsTo(Clubs, { foreignKey: 'home_team', as: 'homeClub' });
+Match.belongsTo(Clubs, { foreignKey: 'away_team', as: 'awayClub' });
