@@ -1,5 +1,6 @@
 import * as jwt from 'jsonwebtoken';
 import fs from 'fs';
+import { NextFunction, Request, Response } from 'express';
 
 export interface MessageErro {
   error: string,
@@ -23,4 +24,16 @@ export const decoder = async (token: string): Promise<any> => {
   } catch (err) {
     return false;
   }
+};
+
+export const tokenValidation = async (req: Request, res: Response, next: NextFunction) => {
+  const { authorization } = req.headers;
+  if (authorization) {
+    const userData = await decoder(authorization);
+    if (userData) {
+      req.headers = userData;
+      return next();
+    }
+  }
+  return res.status(401).end();
 };
