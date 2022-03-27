@@ -1,7 +1,11 @@
 import express from 'express';
 import { getValidateLogin, postLoginController } from './database/controller/login-controller';
 import { postLoginValidation } from './database/middlewares/login-validations';
-import { getAllClubsController, getByIdClubController } from './database/controller/clubs-controller';
+import {
+  getAllClubsController,
+  getByIdClubController,
+} from './database/controller/clubs-controller';
+import { getAllMatchsController } from './database/controller/matchs-controller';
 
 const router = express.Router();
 
@@ -20,5 +24,9 @@ router
 router
   .route('/clubs')
   .get(getAllClubsController);
+
+router
+  .route('/matchs')
+  .get(getAllMatchsController);
 
 export default router;
