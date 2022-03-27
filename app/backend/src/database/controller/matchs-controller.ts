@@ -18,7 +18,7 @@ export const getAllMatchsController = async (req: Request, res: Response) => {
   return res.status(401).end();
 };
 
-export const addMatchController = async (req: Request, res: Response, next: NextFunction) => {
+export const addMatchController = async (req: Request, res: Response) => {
   const newMatch = await addMatchService(req.body);
   if (!newMatch) return res.status(401).end();
   return res.status(201).json(newMatch);
