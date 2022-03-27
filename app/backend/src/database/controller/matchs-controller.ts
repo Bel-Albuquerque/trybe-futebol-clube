@@ -3,6 +3,7 @@ import {
   getAllMatchsService,
   getTrueOrFalseMatchsService,
   addMatchService,
+  editMatchService,
 } from '../service/matchs-service';
 
 export const getAllMatchsController = async (req: Request, res: Response) => {
@@ -20,6 +21,13 @@ export const getAllMatchsController = async (req: Request, res: Response) => {
 
 export const addMatchController = async (req: Request, res: Response) => {
   const newMatch = await addMatchService(req.body);
+  if (!newMatch) return res.status(401).end();
+  return res.status(201).json(newMatch);
+};
+
+export const editMatchController = async (req: Request, res: Response) => {
+  const { id } = req.params;
+  const newMatch = await editMatchService(id);
   if (!newMatch) return res.status(401).end();
   return res.status(201).json(newMatch);
 };
