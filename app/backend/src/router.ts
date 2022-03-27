@@ -9,12 +9,13 @@ import {
   getAllMatchsController,
   addMatchController,
 } from './database/controller/matchs-controller';
+import { tokenValidation } from './database/middlewares/tokenValidation';
 
 const router = express.Router();
 
 router
   .route('/login/validate')
-  .get(getValidateLogin);
+  .get(tokenValidation, getValidateLogin);
 
 router
   .route('/login')
