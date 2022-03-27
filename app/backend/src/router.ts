@@ -32,7 +32,7 @@ router
 
 router
   .route('/matchs/:id/finish')
-  .patch(tokenValidation, editMatchController);
+  .patch(editMatchController);
 
 router
   .route('/matchs')
