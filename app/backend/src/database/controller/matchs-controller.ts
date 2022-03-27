@@ -1,5 +1,9 @@
-import { Request, Response } from 'express';
-import { getAllMatchsService, getTrueOrFalseMatchsService } from '../service/matchs-service';
+import { NextFunction, Request, Response } from 'express';
+import {
+  getAllMatchsService,
+  getTrueOrFalseMatchsService,
+  addMatchService,
+} from '../service/matchs-service';
 
 export const getAllMatchsController = async (req: Request, res: Response) => {
   const { inProgress } = req.query;
@@ -14,4 +18,8 @@ export const getAllMatchsController = async (req: Request, res: Response) => {
   return res.status(401).end();
 };
 
-export const getTrueMatchsController = 'xablau';
+export const addMatchController = async (req: Request, res: Response, next: NextFunction) => {
+  const newMatch = await addMatchService(req.body);
+  if (!newMatch) return res.status(401).end();
+  return res.status(200).json(newMatch);
+};
