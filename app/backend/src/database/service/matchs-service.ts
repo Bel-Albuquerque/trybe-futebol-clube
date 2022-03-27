@@ -68,3 +68,16 @@ export const editMatchService = async (id: number) => {
     return false;
   }
 };
+
+export const editMatchGoalsService = async (
+  id: number,
+  homeTeamGoals: number,
+  awayTeamGoals: number,
+) => {
+  try {
+    const editedMatch = await Match.update({ homeTeamGoals, awayTeamGoals }, { where: { id } });
+    return editedMatch;
+  } catch {
+    return false;
+  }
+}
