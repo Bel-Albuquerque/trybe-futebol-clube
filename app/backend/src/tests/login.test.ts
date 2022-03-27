@@ -106,7 +106,7 @@ describe('Rota /login', () => {
     expect(message).to.be.equal(ivalidFildMessage);
   });
 
-  it.only('Testa se é possivel validar o tipo de usuário passando o token no header da requisição ', () => {
+  it('Testa se é possivel validar o tipo de usuário passando o token no header da requisição ', () => {
     const { body } = validateHeades;
     console.log(body);
     
