@@ -17,3 +17,8 @@ export const getByIdClubService = async (id: number) => {
     return false;
   }
 };
+
+export const getClubsById = async (id: number) => {
+  const trueId = await Clubs.findByPk(id);
+  return trueId || false;
+};
