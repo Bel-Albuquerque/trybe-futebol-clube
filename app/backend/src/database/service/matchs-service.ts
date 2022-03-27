@@ -42,3 +42,14 @@ export const getTrueOrFalseMatchsService = async (paramProgrees: Params) => {
     return false;
   }
 };
+
+export const addMatchService = async (body: any) => {
+  if (body.inProgress === false) return false;
+  try {
+    const newMatch = await Match.create(body);
+    console.log(newMatch);
+    return newMatch;
+  } catch {
+    return false;
+  }
+};
