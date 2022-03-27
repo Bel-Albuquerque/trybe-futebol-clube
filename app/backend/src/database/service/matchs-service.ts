@@ -1,6 +1,7 @@
 import QueryString from 'qs';
 import Clubs from '../models/club';
 import Match from '../models/match';
+import { getClubsById } from './clubs-service';
 
 export const getAllMatchsService = async () => {
   try {
@@ -43,8 +44,14 @@ export const getTrueOrFalseMatchsService = async (paramProgrees: Params) => {
   }
 };
 
+export const checkClubsIds = async (id1: number, id2: number) => {
+  const fristId = await getClubsById(id1);
+  const secondId = await getClubsById(id2);
+  return !!(fristId && secondId);
+};
+
 export const addMatchService = async (body: any) => {
-  if (body.inProgress === false) return false;
+  if (!body.inProgress) return false;
   try {
     const newMatch = await Match.create(body);
     return newMatch;
