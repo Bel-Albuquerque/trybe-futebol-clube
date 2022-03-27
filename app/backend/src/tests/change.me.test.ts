@@ -1,62 +1,59 @@
-import * as sinon from 'sinon';
-import * as chai from 'chai';
-import chaiHttp = require('chai-http');
+// import * as sinon from 'sinon';
+// import * as chai from 'chai';
+// import chaiHttp = require('chai-http');
+// import { allUsers, user as userMock, LoginBody, validLogin, userResponse } from './mocks/userMock';
+// import { app } from '../app';
+// import User from '../database/models/user';
+// import { Response } from 'superagent';
+// import { number } from 'joi';
 
-import { app } from '../app';
-import User from '../database/models/user';
-import { Response } from 'superagent';
+// chai.use(chaiHttp);
 
-chai.use(chaiHttp);
+// const { expect } = chai;
 
-const { expect } = chai;
+// describe('Rota /login', () => {
+//   let response: Response;
 
-describe('Seu teste', () => {
-  /**
-   * Exemplo do uso de stubs com tipos
-   */
+//   interface IUser {
+//     id: number,
+//     username: string,
+//     role: string,
+//     email: string,
+//     password: string
+//   }
 
-  let chaiHttpResponse: Response;
-const mock = [
-  {
-    id: 1,
-    username: 'Admin',
-    role: 'admin',
-    email: 'admin@admin.com',
-    password: '$2a$08$xi.Hxk1czAO0nZR..B393u10aED0RQ1N3PAEXQ7HxtLjKPEZBu.PW'
-  },
-  {
-    id: 2,
-    username: 'User',
-    role: 'user',
-    email: 'user@user.com',
-    password: '$2a$08$Y8Abi8jXvsXyqm.rmp0B.uQBA5qUz7T6Ghlg/CvVr/gLxYj5UAZVO'
-  }
-]
-interface IUser {
-  id: number,
-  username: string,
-  role: string,
-  email: string,
-  password: string
-}
+//   before(async () => {
+//     sinon
+//       .stub(User, "findAll")
+//       .resolves(allUsers as any[]);
+//     sinon
+//       .stub(User, 'findOne')
+//       .resolves(userMock as any);
+//   });
 
-  before(async () => {
-    sinon
-      .stub(User, "findAll")
-      .resolves(mock as any[]);
-  });
+//   after(() => {
+//     (User.findAll as sinon.SinonStub).restore();
+//     (User.findOne as sinon.SinonStub).restore();
+//   })
 
-  after(() => {
-    (User.findAll as sinon.SinonStub).restore();
-  })
+//   describe('Testes da rota POST /login', () => {
 
-  // it('...', async () => {
-  //   chaiHttpResponse = await chai.request(app)
+//     before(async () => {
+//       response = await chai
+//         .request(app)
+//         .post('/login')
+//         .send(validLogin);
 
-  //   expect(...)
-  // });
+//         const { body: { user, token } }: LoginBody = response;
 
-  it('Seu sub-teste', () => {
-    expect(false).to.be.eq(false);
-  });
-});
+//       it('Testa se é possível fazer o login com dados corretos e que após o acesso será redirecionado para a tela de jogos', () => {
+//         expect(response).to.be.an('object');
+//         expect(response).to.have.status(200);
+//         expect(user?.username).to.be.an(userResponse.user.username);
+//         expect(user?.role).to.be.an(userResponse.user.role);
+//         expect(user?.email).to.be.an(userResponse.user.email);
+//         expect(token).to.be.an('object');
+//       })
+//     });
+//   });
+// });
