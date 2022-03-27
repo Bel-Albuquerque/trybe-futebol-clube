@@ -11,6 +11,7 @@ import {
   editMatchController,
 } from './database/controller/matchs-controller';
 import { tokenValidation } from './database/middlewares/tokenValidation';
+import { postMatchValidation } from './database/middlewares/matchs-validations';
 
 const router = express.Router();
 
@@ -37,6 +38,6 @@ router
 router
   .route('/matchs')
   .get(getAllMatchsController)
-  .post(tokenValidation, addMatchController);
+  .post(tokenValidation, postMatchValidation, addMatchController);
 
 export default router;
