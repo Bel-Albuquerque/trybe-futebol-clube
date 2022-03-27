@@ -7,6 +7,7 @@ import {
 } from './database/controller/clubs-controller';
 import {
   getAllMatchsController,
+  addMatchController,
 } from './database/controller/matchs-controller';
 
 const router = express.Router();
@@ -29,6 +30,7 @@ router
 
 router
   .route('/matchs')
-  .get(getAllMatchsController);
+  .get(getAllMatchsController)
+  .post(addMatchController);
 
 export default router;
