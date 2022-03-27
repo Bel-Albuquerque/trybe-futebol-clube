@@ -21,7 +21,7 @@ class App {
     };
 
     this.app.use(accessControl);
-    this.app.use(cors())
+    this.app.use(cors());
     this.app.use(express.json());
     this.app.use('/', router);
     // ...
