@@ -47,8 +47,16 @@ export const addMatchService = async (body: any) => {
   if (body.inProgress === false) return false;
   try {
     const newMatch = await Match.create(body);
-    console.log(newMatch);
     return newMatch;
+  } catch {
+    return false;
+  }
+};
+
+export const editMatchService = async (id: number) => {
+  try {
+    const editedMatch = await Match.update({ inProgress: false }, { where: { id } });
+    return editedMatch;
   } catch {
     return false;
   }
