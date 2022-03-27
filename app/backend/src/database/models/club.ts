@@ -4,7 +4,7 @@ import db from '.';
 export default class Clubs extends Model {
   public id: number;
 
-  public club_name: string;
+  public clubName: string;
 }
 
 Clubs.init({
@@ -14,7 +14,7 @@ Clubs.init({
     autoIncrement: true,
     allowNull: false,
   },
-  club_name: {
+  clubName: {
     type: DataTypes.STRING,
     allowNull: false,
   },
