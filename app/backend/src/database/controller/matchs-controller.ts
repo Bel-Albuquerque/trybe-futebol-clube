@@ -6,6 +6,7 @@ import {
   addMatchService,
   editMatchService,
   checkClubsIds,
+  editMatchGoalsService,
 } from '../service/matchs-service';
 
 export const getAllMatchsController = async (req: Request, res: Response) => {
@@ -35,7 +36,15 @@ export const addMatchController = async (req: Request, res: Response) => {
 
 export const editMatchController = async (req: Request, res: Response) => {
   const { id } = req.params;
-  const newMatch = await editMatchService(Number(id));
-  if (!newMatch) return res.status(401).end();
-  return res.status(200).json(newMatch);
+  const editMatch = await editMatchService(Number(id));
+  if (!editMatch) return res.status(401).end();
+  return res.status(200).json(editMatch);
+};
+
+export const editMatchGoals = async (req: Request, res: Response) => {
+  const { id } = req.params;
+  const { homeTeamGoals, awayTeamGoals } = req.body;
+  const editMatch = await editMatchGoalsService(Number(id), homeTeamGoals, awayTeamGoals);
+  if (!editMatch) return res.status(401).end();
+  return res.status(200).json(editMatch);
 };
