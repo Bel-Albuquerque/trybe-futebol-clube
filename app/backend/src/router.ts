@@ -5,7 +5,9 @@ import {
   getAllClubsController,
   getByIdClubController,
 } from './database/controller/clubs-controller';
-import { getAllMatchsController } from './database/controller/matchs-controller';
+import {
+  getAllMatchsController,
+} from './database/controller/matchs-controller';
 
 const router = express.Router();
 
