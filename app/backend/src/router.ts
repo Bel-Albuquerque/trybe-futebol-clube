@@ -8,6 +8,7 @@ import {
 import {
   getAllMatchsController,
   addMatchController,
+  editMatchController,
 } from './database/controller/matchs-controller';
 import { tokenValidation } from './database/middlewares/tokenValidation';
 
@@ -28,6 +29,10 @@ router
 router
   .route('/clubs')
   .get(getAllClubsController);
+
+router
+  .route('/matchs/:id/finish')
+  .patch(tokenValidation, editMatchController);
 
 router
   .route('/matchs')
