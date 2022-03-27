@@ -32,6 +32,6 @@ router
 router
   .route('/matchs')
   .get(getAllMatchsController)
-  .post(addMatchController);
+  .post(tokenValidation, addMatchController);
 
 export default router;
