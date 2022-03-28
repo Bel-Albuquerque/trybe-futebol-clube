@@ -13,6 +13,7 @@ import {
 } from './database/controller/matchs-controller';
 import { tokenValidation } from './database/middlewares/tokenValidation';
 import { postMatchValidation } from './database/middlewares/matchs-validations';
+import { gethomeLeaderBoardController } from './database/controller/leaderBoard-controller';
 
 const router = express.Router();
 
@@ -44,5 +45,9 @@ router
   .route('/matchs')
   .get(getAllMatchsController)
   .post(tokenValidation, postMatchValidation, addMatchController);
+
+router
+  .route('/leaderboard/home')
+  .get(gethomeLeaderBoardController);
 
 export default router;
