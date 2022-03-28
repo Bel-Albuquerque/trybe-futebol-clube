@@ -11,7 +11,7 @@ interface ILeaderBoard {
   efficiency: number;
 }
 
-export default class LeaderBoard implements ILeaderBoard {
+export default class ClubLeaderBoard implements ILeaderBoard {
   name: string;
 
   totalPoints: number;
