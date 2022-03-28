@@ -14,6 +14,8 @@ interface ILeaderBoard {
 export default class ClubLeaderBoard implements ILeaderBoard {
   name: string;
 
+  filterType: string;
+
   totalPoints: number;
 
   totalGames: number;
@@ -32,8 +34,9 @@ export default class ClubLeaderBoard implements ILeaderBoard {
 
   efficiency: number;
 
-  constructor(name: string) {
+  constructor(name: string, filterType: string) {
     this.name = name;
+    this.filterType = filterType;
     this.totalPoints = 0;
     this.totalGames = 0;
     this.totalVictories = 0;
@@ -65,12 +68,14 @@ export default class ClubLeaderBoard implements ILeaderBoard {
     this.totalLosses += pt;
   };
 
-  public addGoalsFavor = (pt: number) => {
-    this.goalsFavor += pt;
+  public addGoalsFavor = (homeTeamGoals: number, awayTeamGoals: number) => {
+    if (this.filterType === 'home') this.goalsFavor += homeTeamGoals;
+    if (this.filterType === 'away') this.goalsFavor += awayTeamGoals;
   };
 
-  public addGoalsOwn = (pt: number) => {
-    this.goalsOwn += pt;
+  public addGoalsOwn = (homeTeamGoals: number, awayTeamGoals: number) => {
+    if (this.filterType === 'home') this.goalsOwn += awayTeamGoals;
+    if (this.filterType === 'away') this.goalsOwn += homeTeamGoals;
   };
 
   public addGoalsBalance = () => {
@@ -79,6 +84,10 @@ export default class ClubLeaderBoard implements ILeaderBoard {
 
   public addEfficiency = () => {
     this.efficiency = Number(((this.totalPoints / (this.totalGames * 3)) * 100).toFixed(2));
+  };
+
+  public setFilterType = (type: string) => {
+    this.filterType = type;
   };
 
   public getObj() {

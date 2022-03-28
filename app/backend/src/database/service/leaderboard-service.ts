@@ -15,21 +15,20 @@ const sortSmaller = (a: number, b: number) => {
 const sortArray = (array: any[]) => {
   array.sort((a: any, b: any) => sortBigest(a.totalPoints, b.totalPoints) || (
     sortBigest(a.totalVictories, b.totalVictories)) || (
-      sortBigest(a.goalsBalance, b.goalsBalance)) || (
-      sortBigest(a.goalsFavor, b.goalsFavor)) || (
-      sortSmaller(a.goalsOwn, b.goalsOwn)) || 0);
+    sortBigest(a.goalsBalance, b.goalsBalance)) || (
+    sortBigest(a.goalsFavor, b.goalsFavor)) || (
+    sortSmaller(a.goalsOwn, b.goalsOwn)) || 0);
 
   return array;
 };
 
 const teamWins = (objMatch: Match, clubLeaderBoard: ClubLeaderBoard) => {
   const { homeTeamGoals, awayTeamGoals } = objMatch;
-
   clubLeaderBoard.addTotalPoints(3);
   clubLeaderBoard.addTotalGames(1);
   clubLeaderBoard.addTotalVictories(1);
-  clubLeaderBoard.addGoalsFavor(homeTeamGoals);
-  clubLeaderBoard.addGoalsOwn(awayTeamGoals);
+  clubLeaderBoard.addGoalsFavor(homeTeamGoals, awayTeamGoals);
+  clubLeaderBoard.addGoalsOwn(homeTeamGoals, awayTeamGoals);
 };
 
 const teamDraws = (objMatch: Match, clubLeaderBoard: ClubLeaderBoard) => {
@@ -38,8 +37,8 @@ const teamDraws = (objMatch: Match, clubLeaderBoard: ClubLeaderBoard) => {
   clubLeaderBoard.addTotalPoints(1);
   clubLeaderBoard.addTotalGames(1);
   clubLeaderBoard.addTotalDraws(1);
-  clubLeaderBoard.addGoalsFavor(homeTeamGoals);
-  clubLeaderBoard.addGoalsOwn(awayTeamGoals);
+  clubLeaderBoard.addGoalsFavor(homeTeamGoals, awayTeamGoals);
+  clubLeaderBoard.addGoalsOwn(homeTeamGoals, awayTeamGoals);
 };
 
 const teamLosses = (objMatch: Match, clubLeaderBoard: ClubLeaderBoard) => {
@@ -47,8 +46,8 @@ const teamLosses = (objMatch: Match, clubLeaderBoard: ClubLeaderBoard) => {
 
   clubLeaderBoard.addTotalGames(1);
   clubLeaderBoard.addTotalLosses(1);
-  clubLeaderBoard.addGoalsFavor(homeTeamGoals);
-  clubLeaderBoard.addGoalsOwn(awayTeamGoals);
+  clubLeaderBoard.addGoalsFavor(homeTeamGoals, awayTeamGoals);
+  clubLeaderBoard.addGoalsOwn(homeTeamGoals, awayTeamGoals);
 };
 
 const getHomeTeamPoints = (clubId: number, objMatch: Match, clubLeaderBoard: ClubLeaderBoard) => {
@@ -72,19 +71,25 @@ const getAwayTeamPoints = (clubId: number, objMatch: Match, clubLeaderBoard: Clu
 };
 
 const getAllTeamPoints = (clubId: number, objMatch: Match, clubLeaderBoard: ClubLeaderBoard) => {
+  clubLeaderBoard.setFilterType('home');
   getHomeTeamPoints(clubId, objMatch, clubLeaderBoard);
+  clubLeaderBoard.setFilterType('away');
   getAwayTeamPoints(clubId, objMatch, clubLeaderBoard);
+  clubLeaderBoard.setFilterType('all');
 };
 
 const forEachMatch = (clubId: number, allMatches: Match[], clubLeaderBoard: ClubLeaderBoard) => {
-  allMatches.forEach((objMatch) => (
-    getHomeTeamPoints(clubId, objMatch, clubLeaderBoard)));
+  allMatches.forEach((objMatch) => {
+    if (clubLeaderBoard.filterType === 'home') getHomeTeamPoints(clubId, objMatch, clubLeaderBoard);
+    if (clubLeaderBoard.filterType === 'away') getAwayTeamPoints(clubId, objMatch, clubLeaderBoard);
+    if (clubLeaderBoard.filterType === 'all') getAllTeamPoints(clubId, objMatch, clubLeaderBoard);
+  });
 };
 
 const getName = (objClub: Clubs) => objClub.clubName;
 
-export const makeObjectForClub = (objClub: Clubs, allMatches: Match[]) => {
-  const clubLeaderBoard = new ClubLeaderBoard(getName(objClub));
+export const makeObjectForClub = (objClub: Clubs, allMatches: Match[], filterType: string) => {
+  const clubLeaderBoard = new ClubLeaderBoard(getName(objClub), filterType);
 
   forEachMatch(objClub.id, allMatches, clubLeaderBoard);
   clubLeaderBoard.addGoalsBalance();
@@ -93,17 +98,18 @@ export const makeObjectForClub = (objClub: Clubs, allMatches: Match[]) => {
   return clubLeaderBoard.getObj();
 };
 
-const makeLeaderboard = (objClub: Clubs, allMatches: Match[], array: any) => {
-  const obj = makeObjectForClub(objClub, allMatches);
+const makeLeaderboard = (objClub: Clubs, allMatches: Match[], array: any, filterType: string) => {
+  const obj = makeObjectForClub(objClub, allMatches, filterType);
   array.push(obj);
 };
 
-export async function settingUpLeaderbord() {
+export async function settingUpLeaderbord(filterType = 'home') {
   const array: [] | ClubLeaderBoard[] = [];
 
   const allClubs = await Clubs.findAll();
   const allMatches = await Match.findAll({ where: { inProgress: false } });
 
-  allClubs.forEach((objClub) => makeLeaderboard(objClub, allMatches, array));
+  allClubs.forEach((objClub) => makeLeaderboard(objClub, allMatches, array, filterType));
+
   return sortArray(array);
 }
