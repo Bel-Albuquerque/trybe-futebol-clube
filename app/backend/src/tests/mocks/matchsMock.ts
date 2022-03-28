@@ -118,3 +118,43 @@ export const inProgressFalseMatchs = [
     }
   }
 ]
+
+export const addMatch = {
+  "homeTeam": 16,
+  "awayTeam": 8, 
+  "homeTeamGoals": 2,
+  "awayTeamGoals": 2,
+  "inProgress": true
+}
+
+export const createMatchs = {
+  id: 5,
+  homeTeam: 16,
+  awayTeam: 8, 
+  homeTeamGoals: 2,
+  awayTeamGoals: 2,
+  inProgress: false
+}
+
+export const updateMatchs = {
+  id: 5,
+  homeTeam: 16,
+  awayTeam: 8, 
+  homeTeamGoals: 2,
+  awayTeamGoals: 2,
+  inProgress: false
+}
+
+export const updatedGoalsMatchs = {
+  id: 5,
+  homeTeam: 16,
+  awayTeam: 8, 
+  homeTeamGoals: 2,
+  awayTeamGoals: 2,
+  inProgress: false
+}
+
+export const updateGoals = {
+  "homeTeamGoals": 2,
+  "awayTeamGoals": 2,
+}
