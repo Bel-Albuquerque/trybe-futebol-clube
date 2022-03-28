@@ -15,7 +15,7 @@ const { expect } = chai;
 let chaiLib = <any>chai;
 let chaiRequestLib = chaiLib.default.request;
 
-describe('Rota /matchs', () => {
+describe('Rota GET /matchs', () => {
   let allMatchsResponse: Response;
   
   before(async () => {
@@ -39,7 +39,7 @@ describe('Rota /matchs', () => {
   });
 });
 
-describe('Rota /matchs?inProgress=true', () => {
+describe('Rota GET /matchs?inProgress=true', () => {
   let matchsInProgressResponse: Response;
   
   before(async () => {
@@ -65,7 +65,7 @@ describe('Rota /matchs?inProgress=true', () => {
   });
 });
 
-describe('Rota /matchs?inProgress=true', () => {
+describe('Rota GET /matchs?inProgress=true', () => {
   let matchsNotInProgressResponse: Response;
   
   before(async () => {
