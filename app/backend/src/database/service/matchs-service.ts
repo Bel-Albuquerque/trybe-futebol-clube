@@ -80,4 +80,8 @@ export const editMatchGoalsService = async (
   } catch {
     return false;
   }
-}
+};
+
+export default {
+  checkClubsIds,
+};
