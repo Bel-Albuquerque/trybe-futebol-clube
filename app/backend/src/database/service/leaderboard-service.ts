@@ -88,7 +88,7 @@ const forEachMatch = (clubId: number, allMatches: Match[], clubLeaderBoard: Club
 
 const getName = (objClub: Clubs) => objClub.clubName;
 
-export const makeObjectForClub = (objClub: Clubs, allMatches: Match[], filterType: string) => {
+const makeObjectForClub = (objClub: Clubs, allMatches: Match[], filterType: string) => {
   const clubLeaderBoard = new ClubLeaderBoard(getName(objClub), filterType);
 
   forEachMatch(objClub.id, allMatches, clubLeaderBoard);
@@ -103,7 +103,7 @@ const makeLeaderboard = (objClub: Clubs, allMatches: Match[], array: any, filter
   array.push(obj);
 };
 
-export async function settingUpLeaderbord(filterType = 'home') {
+export default async function settingUpLeaderbord(filterType = 'home') {
   const array: [] | ClubLeaderBoard[] = [];
 
   const allClubs = await Clubs.findAll();

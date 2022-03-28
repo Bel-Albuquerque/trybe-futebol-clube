@@ -1,5 +1,5 @@
 import { Request, Response } from 'express';
-import { settingUpLeaderbord } from '../service/leaderboard-service';
+import settingUpLeaderbord from '../service/leaderboard-service';
 
 export const getHomeLeaderBoardController = async (req: Request, res: Response) => {
   const getHomeLeaderBoard = await settingUpLeaderbord('home');
