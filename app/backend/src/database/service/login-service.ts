@@ -1,5 +1,5 @@
 import { compareSync } from 'bcryptjs';
-import { generateToken } from '../middlewares/tokenValidation';
+import { generateToken } from '../utils-validations/tokenValidation';
 import User from '../models/user';
 
 export const postLoginService = async (email: string, password: string) => {
