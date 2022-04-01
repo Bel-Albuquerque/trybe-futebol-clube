@@ -1,10 +1,5 @@
 # TFC - Trybe Futbol Club
 
-![GitHub repo size](https://img.shields.io/github/repo-size/iuricode/README-template?style=for-the-badge)
-![GitHub language count](https://img.shields.io/github/languages/count/iuricode/README-template?style=for-the-badge)
-![GitHub forks](https://img.shields.io/github/forks/iuricode/README-template?style=for-the-badge)
-![Bitbucket open issues](https://img.shields.io/bitbucket/issues/iuricode/README-template?style=for-the-badge)
-![Bitbucket open pull requests](https://img.shields.io/bitbucket/pr-raw/iuricode/README-template?style=for-the-badge)
 
 <img src="front-example.png" alt="front-image">
 
@@ -55,5 +50,5 @@ Para rodar o docker-compose:
 Agora é só acessar seu [localhost:3000](http://localhost:3000)
 
   
- ou, se preferir não instalar nada, pode acessar o link do [deploy](http://ec2-54-152-192-176.compute-1.amazonaws.com:3000/)
+ ou, se preferir não instalar nada, pode acessar direto o link do [deploy](http://ec2-54-152-192-176.compute-1.amazonaws.com:3000/)
  
