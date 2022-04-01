@@ -1,6 +1,6 @@
 import express from 'express';
 import { getValidateLogin, postLoginController } from './database/controller/login-controller';
-import { postLoginValidation } from './database/middlewares/login-validations';
+import postLoginValidation from './database/middlewares/login-validations';
 import {
   getAllClubsController,
   getByIdClubController,
@@ -11,8 +11,8 @@ import {
   editMatchController,
   editMatchGoalsController,
 } from './database/controller/matchs-controller';
-import { tokenValidation } from './database/middlewares/tokenValidation';
-import { postMatchValidation } from './database/middlewares/matchs-validations';
+import { tokenValidation } from './database/utils-validations/tokenValidation';
+import postMatchValidation from './database/middlewares/matchs-validations';
 import {
   getHomeLeaderBoardController,
   getAwayLeaderBoardController,
