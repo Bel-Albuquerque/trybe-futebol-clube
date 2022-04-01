@@ -1,5 +1,5 @@
 import { Request, Response } from 'express';
-import { emailOrPasswodInvalid } from '../erros.ts/erroMessages';
+import { emailOrPasswodInvalid } from '../utils-validations/erroMessages';
 import { postLoginService } from '../service/login-service';
 
 export const postLoginController = async (req: Request, res: Response) => {

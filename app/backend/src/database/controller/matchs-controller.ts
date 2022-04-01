@@ -1,5 +1,5 @@
 import { Request, Response } from 'express';
-import { teamNotFound } from '../erros.ts/erroMessages';
+import { teamNotFound } from '../utils-validations/erroMessages';
 import {
   getAllMatchsService,
   getTrueOrFalseMatchsService,
