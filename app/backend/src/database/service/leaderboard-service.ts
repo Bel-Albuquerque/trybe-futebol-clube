@@ -1,23 +1,23 @@
 import Clubs from '../models/club';
 import Match from '../models/match';
-import ClubLeaderBoard from './classLeaderBoard';
+import ClubLeaderBoard from './utils/classLeaderBoard';
 
-const sortBigest = (a: number, b: number) => {
+const sortBiggest = (a: number, b: number) => {
   if (a < b) return 1;
   if (b < a) return -1;
 };
 
-const sortSmaller = (a: number, b: number) => {
+const sortSmallest = (a: number, b: number) => {
   if (a > b) return 1;
   if (b > a) return -1;
 };
 
 const sortArray = (array: any[]) => {
-  array.sort((a: any, b: any) => sortBigest(a.totalPoints, b.totalPoints) || (
-    sortBigest(a.totalVictories, b.totalVictories)) || (
-    sortBigest(a.goalsBalance, b.goalsBalance)) || (
-    sortBigest(a.goalsFavor, b.goalsFavor)) || (
-    sortSmaller(a.goalsOwn, b.goalsOwn)) || 0);
+  array.sort((a: any, b: any) => sortBiggest(a.totalPoints, b.totalPoints) || (
+    sortBiggest(a.totalVictories, b.totalVictories)) || (
+    sortBiggest(a.goalsBalance, b.goalsBalance)) || (
+    sortBiggest(a.goalsFavor, b.goalsFavor)) || (
+    sortSmallest(a.goalsOwn, b.goalsOwn)) || 0);
 
   return array;
 };
@@ -41,7 +41,7 @@ const teamDraws = (objMatch: Match, clubLeaderBoard: ClubLeaderBoard) => {
   clubLeaderBoard.addGoalsOwn(homeTeamGoals, awayTeamGoals);
 };
 
-const teamLosses = (objMatch: Match, clubLeaderBoard: ClubLeaderBoard) => {
+const teamLoses = (objMatch: Match, clubLeaderBoard: ClubLeaderBoard) => {
   const { homeTeamGoals, awayTeamGoals } = objMatch;
 
   clubLeaderBoard.addTotalGames(1);
@@ -56,7 +56,7 @@ const getHomeTeamPoints = (clubId: number, objMatch: Match, clubLeaderBoard: Clu
   if (clubId === homeTeam) {
     if (homeTeamGoals > awayTeamGoals) teamWins(objMatch, clubLeaderBoard);
     if (homeTeamGoals === awayTeamGoals) teamDraws(objMatch, clubLeaderBoard);
-    if (homeTeamGoals < awayTeamGoals) teamLosses(objMatch, clubLeaderBoard);
+    if (homeTeamGoals < awayTeamGoals) teamLoses(objMatch, clubLeaderBoard);
   }
 };
 
@@ -66,7 +66,7 @@ const getAwayTeamPoints = (clubId: number, objMatch: Match, clubLeaderBoard: Clu
   if (clubId === awayTeam) {
     if (awayTeamGoals > homeTeamGoals) teamWins(objMatch, clubLeaderBoard);
     if (awayTeamGoals === homeTeamGoals) teamDraws(objMatch, clubLeaderBoard);
-    if (awayTeamGoals < homeTeamGoals) teamLosses(objMatch, clubLeaderBoard);
+    if (awayTeamGoals < homeTeamGoals) teamLoses(objMatch, clubLeaderBoard);
   }
 };
 
@@ -103,7 +103,7 @@ const makeLeaderboard = (objClub: Clubs, allMatches: Match[], array: any, filter
   array.push(obj);
 };
 
-export default async function settingUpLeaderbord(filterType = 'home') {
+export default async function settingUpLeaderboard(filterType = 'home') {
   const array: [] | ClubLeaderBoard[] = [];
 
   const allClubs = await Clubs.findAll();
