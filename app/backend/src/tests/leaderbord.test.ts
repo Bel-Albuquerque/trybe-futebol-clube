@@ -10,7 +10,7 @@ import { allLeaderborder, allMatchs, allUsers } from './mocks/leaderbordMock';
 chai.use(chaiHttp);
 
 const { expect } = chai;
-''
+
 // https://stackoverflow.com/questions/37040853/chai-request-is-not-a-function-while-using-request-js-for-http-service-unit-test e Ronaldo Junior
 let chaiLib = <any>chai;
 let chaiRequestLib = chaiLib.default.request;
