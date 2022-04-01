@@ -10,40 +10,53 @@
 
 <img src="front-example.png" alt="front-image">
 
-> Linha adicional de texto informativo sobre o que o projeto faz. Sua introdução deve ter cerca de 2 ou 3 linhas. Não exagere, as pessoas não vão ler.
+> 
+O projeto simula uma aplicação responsável pela série A do fictício TFC - Trybe Futebol Clube.
+Nesse projeto eu desenvolvi todo o backend e o Banco de Dados, de uma aplicação com o frontend já pronto, modelei os dados com MySQL através do Sequelize, fiz testes de integração utilizando chai/sinon e "dockerizei" a aplicação e "orquestrei" os conteines.
+
 
 ### Ajustes e melhorias
 
 O projeto ainda está em desenvolvimento e as próximas atualizações serão voltadas nas seguintes tarefas:
 
-- [x] Tarefa 1
-- [x] Tarefa 2
-- [x] Tarefa 3
-- [ ] Tarefa 4
-- [ ] Tarefa 5
+- [x] Melhorar a estrutura da aplicação
+- [x] Melhorar os testes de integração
+- [x] Produzir testes unitários.
 
 ## 💻 Pré-requisitos
 
 Antes de começar, verifique se você atendeu aos seguintes requisitos:
-<!---Estes são apenas requisitos de exemplo. Adicionar, duplicar ou remover conforme necessário--->
-* Você instalou a versão mais recente de `<linguagem / dependência / requeridos>`
-* Você tem uma máquina `<Windows / Linux / Mac>`. Indique qual sistema operacional é compatível / não compatível.
-* Você leu `<guia / link / documentação_relacionada_ao_projeto>`.
 
-## 🚀 Instalando <nome_do_projeto>
+* Para o projeto rodar corretamente, é necessário ter instalado a versão 16 do node, Docker e o docker-compose.
 
-Para instalar o <nome_do_projeto>, siga estas etapas:
 
-Linux e macOS:
+## 🚀 Instalando TFC - Trybe Futebol Club
+
+Para instalar o TFC- trybe Futebol CLub, siga estas etapas:
+(sistema operacional linux)
+
+Abra seu terminal <ctrl> + <alt> + <t>
+  
+Clone o repositório:
 ```
-<comando_de_instalação>
+<git clone https://github.com/Bel-Albuquerque/trybe-futebol-clube.git>
 ```
-
-Windows:
-```
-<comando_de_instalação>
-```
-
+Entre na pasta do repositório que você acabou de clonar:
+ ```
+<cd trybe-futebol-clube>
+  ```
+Instale as dependências:
+ ```
+npm install
+  ```
+  
+Para rodar o docker-compose:
+  ```
+  npm run compose:up
+  ```
+Agora é só acessar seu [localhost:3000](http://localhost:3000)
+ou, se preferir não instalar nada, pode acessar o link do [deploy](http://ec2-54-152-192-176.compute-1.amazonaws.com:3000/)
+ 
 ## ☕ Usando <nome_do_projeto>
 
 Para usar <nome_do_projeto>, siga estas etapas:
