@@ -17,7 +17,7 @@ import {
   getHomeLeaderBoardController,
   getAwayLeaderBoardController,
   getAllLeaderBoardController,
-} from './database/controller/leaderBoard-controller';
+} from './database/controller/leaderboard-controller';
 
 const router = express.Router();
 
