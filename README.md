@@ -50,7 +50,7 @@ Para rodar o docker-compose:
 Agora é só acessar seu [localhost:3000](http://localhost:3000)
 
   
- ou, se preferir não instalar nada, pode acessar direto o link do [deploy](http://ec2-54-152-192-176.compute-1.amazonaws.com:3000/)
+ ou, se preferir não instalar nada, pode acessar direto o link do [deploy](http://ec2-50-19-168-8.compute-1.amazonaws.com:3000/)
  
  
 Projeto desenvolvido durante o curso da [Trybe](https://github.com/tryber).
